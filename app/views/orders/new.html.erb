@@ -1,0 +1,56 @@
+<%= render 'layouts/users_header' %>
+
+<section class="hero is-info">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        お届け先・お支払い方法選択画面
+      </h1>
+    </div>
+  </div>
+</section>
+
+<% if @order.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved: not successfully</h2>
+    <ul>
+      <% @order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-6">
+        <%= form_for @order do |f| %>
+          <% current_user.addresses.each do |address| %>
+            <div class="panel">
+              <div class="field">
+                <div class="control">
+                  <p class="panel-heading">
+                    <%= f.check_box :address_id, {multiple: false}, address.id %>
+                  </p>
+                  <section class="section">
+                    <strong><%= address.last_name %> <%= address.given_name %>（<%= address.last_name_furigana %> <%= address.given_name_furigana %>）</strong><br>
+                    〒 <%= address.post_code %><br>
+                    <%= address.prefecture %> <%= address.city %> <%= address.street_number %><br>
+                    <%= address.building %><br>
+                  </section>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          <div class="field">
+            <div class="control select">
+              <%= f.select :pay_method, Order.pay_methods.keys %>
+            </div>
+          </div>
+          <%= f.button :submit, class: "button is-info" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

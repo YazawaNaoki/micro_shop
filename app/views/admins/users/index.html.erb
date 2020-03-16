@@ -1,0 +1,47 @@
+<%= render 'layouts/admins_header' %>
+
+<section class="hero is-info">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        顧客一覧
+      </h1>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+   <div class="container">
+     <div class="columns is-centered">
+       <div class="column is-11">
+         <table class="table is-fullwidth">
+           <tr>
+             <th>名前</th>
+             <th>メールアドレス</th>
+             <th>電話番号</th>
+             <th></th>
+             <th></th>
+           </tr>
+
+           <% @users.each do |user| %>
+             <tr>
+               <td><%= user.last_name %> <%= user.given_name %>（<%= user.last_name_furigana %> <%= user.given_name_furigana %>）</td>
+               <td><%= user.email %></td>
+               <td><%= user.phone_number %></td>
+               <td>
+                 <%= link_to admins_user_path(user), class: 'button is-info' do %>
+                   詳細へ
+                 <% end %>
+               </td>
+               <td>
+                 <%= link_to '#', class: 'button is-success' do %>
+                   受注履歴一覧へ
+                 <% end %>
+               </td>
+             </tr>
+           <% end %>
+         </table>
+       </div>
+     </div>
+   </div>
+</section>

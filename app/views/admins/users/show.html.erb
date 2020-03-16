@@ -1,0 +1,50 @@
+<%= render 'layouts/admins_header' %>
+
+<section class="hero is-primary">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        ユーザー詳細
+      </h1>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+   <div class="container">
+     <div class="columns is-centered">
+       <div class="column is-5">
+         <table class="table is-fullwidth">
+           <tr>
+             <th>名前</th>
+             <td><%= @user.last_name %> <%= @user.given_name %>（<%= @user.last_name_furigana %> <%= @user.given_name_furigana %>）</td>
+           </tr>
+           <tr>
+             <th>メールアドレス</th>
+             <td><%= @user.email %></td>
+           </tr>
+           <tr>
+             <th>電話番号</th>
+             <td><%= @user.phone_number %></td>
+           </tr>
+           <% @user.addresses.each do |address| %>
+             <% i = 1 %>
+             <tr>
+               <th>住所 <%= i %></th>
+               <td>
+                 <strong><%= address.last_name %> <%= address.given_name %>（<%= address.last_name_furigana %> <%= address.given_name_furigana %>）</strong><br>
+                 〒 <%= address.post_code %><br>
+                 <%= address.prefecture %> <%= address.city %> <%= address.street_number %><br>
+                 <%= address.building %><br>
+               </td>
+             </tr>
+             <% i += 1 %>
+           <% end %>
+         </table>
+         <%= link_to (admins_user_alert_path(@user)), class: 'button is-danger is-fullwidth' do %>
+           <i class="fa fa-sign-out fa-lg"></i><span>削除手続き</span>
+         <% end %>
+       </div>
+     </div>
+   </div>
+</section>

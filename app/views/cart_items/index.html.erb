@@ -1,0 +1,79 @@
+<%= render 'layouts/users_header' %>
+
+<section class="hero is-info">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        カート内商品一覧
+      </h1>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <table class="table is-fullwidth">
+          <tr>
+            <th></th>
+            <th>アルバム名</th>
+            <th>値段（税抜き）</th>
+            <th>個数</th>
+            <th>小計</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+          <% current_user.cart_items.each do |cart_item| %>
+            <tr>
+              <td><%= attachment_image_tag cart_item.product, :image, :fill, 50, 50, format: 'jpeg' %></td>
+              <td><%= cart_item.product.album_name %></td>
+              <td><%= cart_item.product.price %></td>
+              <td><%= cart_item.quantity %></td>
+              <td><%= cart_item.total_price %></td>
+              <td>
+                <% @stock_quantity = 0 %>
+                <% cart_item.product.arrivals.each do |arrival| %>
+                    <% @stock_quantity += arrival.count %>
+                <% end %>
+                <% if cart_item.quantity < @stock_quantity %>
+                  <%= link_to cart_item_add_path(:id => cart_item), method: :post, class: 'button is-info' do %>
+                    <i class="fa fa-plus"></i>
+                  <% end %>
+                <% end %>
+              </td>
+              <td>
+                <% unless cart_item.quantity == 1 %>
+                  <%= link_to cart_item_reduce_path(:id => cart_item), method: :post, class: 'button is-warning' do %>
+                    <i class="fa fa-minus"></i>
+                  <% end %>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to cart_item_path(cart_item), method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: 'button is-danger' do %>
+                  <i class="fa fa-trash"></i>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+      <div class="column is-2">
+        <section class="section">
+          <aside class="menu">
+            <p class="menu-label">
+            </p>
+            <ul class="menu-list">
+              <li>
+                <%= link_to "買い物を続ける", products_path, class: "button is-primary" %>
+              </li>
+              <li>
+                <%= link_to "購入確認ページへ", cart_items_confirm_path, class: "button is-success" %>
+              </li>
+            </ul>
+          </aside>
+        </section>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,77 @@
+<%= render 'layouts/admins_header' %>
+
+<section class="hero is-success">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        商品詳細画面
+      </h1>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-3">
+        <nav class="panel">
+          <%= link_to edit_admins_product_path(@product), class: 'panel-block' do %>
+            <span class="panel-icon">
+              <i class="fa fa-edit"></i>
+            </span>
+            商品編集画面へ
+          <% end %>
+
+          <%= link_to edit_admins_product_path(@product), class: 'panel-block' do %>
+            <span class="panel-icon">
+              <i class="fa fa-trash"></i>
+            </span>
+            商品削除
+          <% end %>
+
+          <%= link_to new_admins_product_arrival_path(@product), class: 'panel-block' do %>
+            <span class="panel-icon">
+              <i class="fa fa-file" aria-hidden="true"></i>
+            </span>
+            入荷情報登録へ
+          <% end %>
+
+          <%= link_to admins_product_arrivals_path(@product), class: 'panel-block' do %>
+            <span class="panel-icon">
+              <i class="fa fa-book" aria-hidden="true"></i>
+            </span>
+            この商品の入荷情報一覧へ
+          <% end %>
+        </nav>
+      </div>
+      <div class="column is-5">
+        <%= attachment_image_tag @product, :image, :fill, 500, 500, format: 'jpeg' %>
+      </div>
+      <div class="column is-4">
+        <div class="box">
+          <article class="media">
+            <div class="media-content">
+              <div class="content">
+                <h1><%= @product.album_name %></h1>
+                <p><span>アーティスト名</span>：<%= @product.artist.name %></p>
+                <p><span>レーベル名</span>：<%= @product.label.name %></p>
+                <p><span>ジャンル</span>：<%= @product.genre %></p>
+                <p><span>発売日</span>：<%= @product.sell_at %></p>
+                <p><span>値段</span>：<%= @product.price %> 円（税込）</p>
+                <p><span>在庫数</span>：<%= @stock_quantity %></p>
+                <% @product.cds.each do |cd| %>
+                <p><strong>CDナンバー</strong>：<%= cd.cd_num %></p>
+                <% cd.musics.each do |music| %>
+                  Track num（<%= music.track_num %>）：<%= music.name %>
+                  <br>
+                <% end %>
+                <br>
+              <% end %>
+              <p><span class="tag is-danger"><%= @product.product_status %></span></p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

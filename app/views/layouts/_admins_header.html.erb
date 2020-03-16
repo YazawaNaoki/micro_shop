@@ -1,0 +1,41 @@
+<nav class="navbar is-warning">
+  <div class="navbar-brand">
+    <%= link_to "#", class: "navbar-item" do %>
+      <h1 class="title is-4">MicroShop</h1>
+    <% end %>
+    <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <% if admin_signed_in? %>
+    <div id="navbarExampleTransparentExample" class="navbar-menu">
+      <div class="navbar-item">
+        <%= link_to "商品一覧", admins_products_path, class: "navbar-item button is-warning is-light" %>
+        <div class="navbar-item">
+          <%= link_to "新規作成", admins_making_home_path, class: "navbar-item button is-warning is-light" %>
+        </div>
+      </div>
+
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="field is-grouped">
+            <p class="control">
+              <%= link_to "入荷履歴一覧", admins_arrivals_path, class: "button is-warning is-light" %>
+            </p>
+            <p class="control">
+              <%= link_to "ユーザー一覧", admins_users_path, class: "button is-warning is-light" %>
+            </p>
+            <p class="control">
+              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "button is-warning is-light" %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% else %>
+  <% end %>
+
+</nav>

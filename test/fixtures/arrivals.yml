@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  product_id: 1
+  count: 1
+  arrival_date: 2020-02-08
+
+two:
+  product_id: 1
+  count: 1
+  arrival_date: 2020-02-08

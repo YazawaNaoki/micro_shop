@@ -1,0 +1,45 @@
+<%= render 'layouts/admins_header' %>
+
+<section class="hero is-info">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        商品一覧画面
+      </h1>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <% @products.each do |product| %>
+        <div class="column is-4">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-3by3">
+                <%= attachment_image_tag product, :image, :fill, 500, 500, format: 'jpeg' %>
+              </figure>
+            </div>
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                  <p class="title is-3"><%=link_to product.album_name, admins_product_path(product)  %></p>
+                  <p class="subtitle is-4"><%= product.artist.name %></p>
+                </div>
+              </div>
+
+              <div class="content">
+                <p><span>レーベル名</span>：<%= product.label.name %></p>
+                <p><span>発売日</span>：<%= product.sell_at %></p>
+                <p><%= product.price %> 円（税込）</p>
+                <br>
+                <span class="tag is-info"><%= product.product_status %></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

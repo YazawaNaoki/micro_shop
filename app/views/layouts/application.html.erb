@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MicroShop</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <% if flash[:notice] %>
+      <div class="notification is-primary global-notification">
+        <p class="notice"><%= notice %></p>
+      </div>
+    <% end %>
+    <% if flash[:alert] %>
+      <div class="notification is-danger global-notification">
+        <p class="alert"><%= alert %></p>
+      </div>
+    <% end %>
+    <% if flash[:success] %>
+      <div class="notification is-info global-notification">
+        <p class="success"><%= success %></p>
+      </div>
+    <% end %>
+    <%= yield %>
+    <script src="https://js.pay.jp/" type="text/javascript"></script>
+  </body>
+</html>

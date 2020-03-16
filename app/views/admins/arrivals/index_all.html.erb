@@ -1,0 +1,38 @@
+<%= render 'layouts/admins_header' %>
+
+<section class="hero is-info">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        入荷履歴一覧
+      </h1>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+   <div class="container">
+     <div class="columns is-centered">
+       <div class="column is-11">
+         <table class="table is-fullwidth">
+           <tr>
+             <th>アルバム名</th>
+             <th>アーティスト名</th>
+             <th>レーベル名</th>
+             <th>入荷日</th>
+             <th>入荷数</th>
+           </tr>
+           <% @arrivals.each do |arrival| %>
+             <tr>
+               <td><%= arrival.product.album_name %></td>
+               <td><%= arrival.product.artist.name %></td>
+               <td><%= arrival.product.label.name %></td>
+               <td><%= arrival.arrival_date %></td>
+               <td><%= arrival.count %></td>
+             </tr>
+           <% end %>
+         </table>
+       </div>
+     </div>
+   </div>
+</section>

@@ -1,0 +1,35 @@
+<%= render 'layouts/admins_header' %>
+
+<section class="hero is-info">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        入荷履歴一覧
+      </h1>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+   <div class="container">
+     <div class="columns is-centered">
+       <div class="column is-6">
+         <table class="table is-fullwidth">
+           <tr>
+             <th>レーベル名</th>
+             <th></th>
+             <th></th>
+           </tr>
+
+           <% @labels.each do |label| %>
+             <tr>
+               <td><%= label.name %></td>
+               <td><%= link_to '詳細', admins_label_path(label) %></td>
+               <td><%= link_to '編集', edit_admins_label_path(label) %></td>
+             </tr>
+           <% end %>
+         </table>
+       </div>
+     </div>
+   </div>
+</section>

@@ -1,0 +1,22 @@
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-4">
+        <%= simple_form_for( [product, arrival], url: admins_product_arrivals_path) do |f| %>
+
+        <div class="field">
+          <div class="control">
+            <%= f.input :count, required: false, input_html: { class: "input"}, wrapper: false, label_html: { class: "label" }, label: "入荷数" %>
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <%= f.input :arrival_date, required: false, input_html: { class: "input"}, wrapper: false, label_html: { class: "label" }, label: "入荷日" %>
+          </div>
+        </div>
+        <%= f.button :submit, class:"button is-danger is-medium" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

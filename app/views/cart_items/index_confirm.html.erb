@@ -1,0 +1,59 @@
+<%= render 'layouts/users_header' %>
+
+<section class="hero is-info">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        購入確認ページ
+      </h1>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <table class="table is-fullwidth">
+          <tr>
+            <th></th>
+            <th>アルバム名</th>
+            <th>値段（税抜き）</th>
+            <th>個数</th>
+            <th>小計（税抜き）</th>
+          </tr>
+
+          <% current_user.cart_items.each do |cart_item| %>
+            <tr>
+              <td><%= attachment_image_tag cart_item.product, :image, :fill, 50, 50, format: 'jpeg' %></td>
+              <td><%= cart_item.product.album_name %></td>
+              <td><%= cart_item.product.price %></td>
+              <td><%= cart_item.quantity %></td>
+              <td><%= cart_item.total_price %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+      <div class="column is-4">
+        <nav class="panel">
+          <p class="panel-heading">金額詳細</p>
+          <div class="panel-block">
+            <strong>合計金額（税込）</strong>：<%= (@total_price * 1.1).floor + 500 %> 円
+          </div>
+          <div class="panel-block">
+            <strong>消費税（10％）</strong>：<%= (@total_price * 0.1).floor %> 円
+          </div>
+          <div class="panel-block">
+            <strong>送料（全国一律）</strong>：500円
+          </div>
+          <%= link_to cart_items_path, class: 'panel-block' do %>
+            <span class="panel-icon"><i class="fa fa-shopping-cart fa-lg"></i></span>カートに戻る
+          <% end %>
+          <%= link_to new_order_path, class: 'panel-block' do %>
+            <span class="panel-icon"><i class="fa fa-shopping-basket"></i></span>お届け先・支払い方法選択画面へ進む
+          <% end %>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>

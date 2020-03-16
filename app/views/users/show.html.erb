@@ -1,0 +1,83 @@
+<%= render 'layouts/users_header' %>
+
+<section class="hero is-primary">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        ユーザー詳細
+      </h1>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+   <div class="container">
+     <div class="columns is-centered">
+       <div class="column is-4">
+         <table class="table">
+           <tr>
+             <th>お名前</th>
+             <td><%= @user.last_name %> <%= @user.given_name %>（<%= @user.last_name_furigana %> <%= @user.given_name_furigana %>）</td>
+           </tr>
+           <tr>
+             <th>メールアドレス</th>
+             <td><%= @user.email %></td>
+           </tr>
+           <tr>
+             <th>電話番号</th>
+             <td><%= @user.phone_number %></td>
+           </tr>
+           <% @user.addresses.each do |address| %>
+             <% i = 1 %>
+             <tr>
+               <th>住所 <%= i %></th>
+               <td>
+                 <strong><%= address.last_name %> <%= address.given_name %>（<%= address.last_name_furigana %> <%= address.given_name_furigana %>）</strong><br>
+                 〒 <%= address.post_code %><br>
+                 <%= address.prefecture %> <%= address.city %> <%= address.street_number %><br>
+                 <%= address.building %><br>
+                 <%= link_to "お届け先住所編集", edit_user_address_path(@user, address.id), class: "button is-success is-small" %>
+               </td>
+             </tr>
+             <% i += 1 %>
+           <% end %>
+         </table>
+       </div>
+       <div class="column is-3">
+         <aside class="menu">
+           <ul class="menu-list">
+             <li><a><i class="fa fa-thumbs-up fa-lg"></i><span> いいねした商品</span></a></li>
+           </ul>
+           <ul class="menu-list">
+             <li>
+               <%= link_to cart_items_path do %>
+                 <i class="fa fa-shopping-cart fa-lg"></i><span> カート内商品</span>
+               <% end %>
+              </li>
+           </ul>
+           <ul class="menu-list">
+              <li>
+                <%= link_to (new_user_address_path(@user)) do %>
+                  <i class="fa fa-sticky-note fa-lg"></i><span> お届け先住所追加</span>
+                <% end %>
+              </li>
+           </ul>
+           <ul class="menu-list">
+             <li>
+               <%= link_to (user_alert_path(current_user)) do %>
+                 <i class="fa fa-sign-out fa-lg"></i><span> 退会手続き</span>
+               <% end %>
+             </li>
+           </ul>
+           <ul class="menu-list">
+             <li>
+               <%= link_to new_card_path do %>
+                 <i class="fa fa-credit-card"></i><span> クレジットカード登録</span>
+               <% end %>
+             </li>
+           </ul>
+         </aside>
+       </div>
+     </div>
+   </div>
+</section>

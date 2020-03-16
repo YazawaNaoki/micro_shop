@@ -1,0 +1,27 @@
+<%= render 'layouts/admins_header' %>
+
+<section class="hero is-success">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        新規作成選択画面
+      </h1>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-5">
+        <div class="card">
+          <div class="content">
+          <%= link_to '新規レーベル名を登録', new_admins_label_path, class: "button is-warning is-fullwidth is-light" %>
+          <%= link_to '新規アーティストを登録', new_admins_artist_path, class: "button is-warning is-fullwidth is-light" %>
+          <%= link_to '新規商品を登録', new_admins_product_path, class: "button is-warning is-fullwidth is-light" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

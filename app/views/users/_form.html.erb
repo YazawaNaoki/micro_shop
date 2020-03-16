@@ -1,0 +1,65 @@
+<% if user.errors.any? %>
+<div class="notification is-danger">
+  <div id="error_explanation">
+    <h2><%= pluralize(user.errors.count, "error") %> prohibited this product from being saved: not successfully</h2>
+    <ul>
+      <% user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<% end %>
+<section>
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-5">
+        <%= simple_form_for user, url: user_path(user) do |f| %>
+        <div class="section">
+          <div class="field">
+            <div class="control">
+              <label class="label">お名前（姓）</label>
+              <%= f.input :last_name, required: true, input_html: { class: "input" }, wrapper: false, label: false %>
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <label class="label">お名前（名）</label>
+              <%= f.input :given_name, required: true, input_html: { class: "input" }, wrapper: false, label: false %>
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <label class="label">ふりがな（姓）</label>
+              <%= f.input :last_name_furigana, required: true, input_html: { class: "input" }, wrapper: false, label: false %>
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <label class="label">ふりがな（名）</label>
+              <%= f.input :given_name_furigana, required: true, input_html: { class: "input" }, wrapper: false, label: false %>
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <label class="label">メールアドレス</label>
+              <%= f.input :email, required: true, input_html: { class: "input" }, wrapper: false, label: false %>
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <label class="label">電話番号</label>
+              <%= f.input :phone_number, required: true, input_html: { class: "input" }, wrapper: false, label: false, hint: "-（ハイフン）は不要です" %>
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <%= f.button :submit, class:"button is-danger is-medium" %>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

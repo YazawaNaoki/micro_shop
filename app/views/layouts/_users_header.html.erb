@@ -1,0 +1,63 @@
+<nav class="navbar is-warning">
+  <div class="navbar-brand">
+    <%= link_to root_path, class: "navbar-item" do %>
+      <h1 class="title is-4">MicroShop</h1>
+    <% end %>
+    <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <% if user_signed_in? %>
+    <div id="navbarExampleTransparentExample" class="navbar-menu">
+      <div class="navbar-item">
+        <%= link_to "商品一覧", products_path, class: "navbar-item button is-warning is-light" %>
+        <div class="navbar-item">
+          <%= link_to "注文履歴一覧", '#', class: "navbar-item button is-warning is-light" %>
+        </div>
+      </div>
+
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="field is-grouped">
+            <p class="control">
+              <%= link_to "マイページ", user_path(current_user), class: "button is-warning is-light" %>
+            </p>
+            <p class="control">
+              <%= link_to cart_items_path, class: "button is-warning is-light" do %>
+                <i class="fa fa-shopping-cart fa-lg"></i>
+                <% total_quantity = 0 %>
+                <% current_user.cart_items.each do |cart_item| %>
+                  <% total_quantity += cart_item.quantity %>
+                <% end %>
+                <span class="tag is-warning"><%= total_quantity %></span>
+              <% end %>
+            </p>
+            <p class="control">
+              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "button is-warning is-light" %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <div id="navbarExampleTransparentExample" class="navbar-menu">
+
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="field is-grouped">
+            <p class="control">
+              <%= link_to "ログイン", new_user_session_path, class: "button is-warning is-light" %>
+            </p>
+            <p class="control">
+              <%= link_to "新規登録", new_user_registration_path, class: "button is-warning is-light" %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+</nav>
